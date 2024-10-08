@@ -1,11 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Locura total</title>
-</head>
-<body>
+{% extends "inicio/index.html" %}
+
+{% block h1_header %}
+    SEGUNDO TEMPLATE
+{% endblock h1_header %}
+{%load static%}
+{% block main %}
     <h1>SEGUNDO LOCO</h1>
     <h2>
         {{fecha_actual}}
@@ -23,5 +22,5 @@
         {% endfor %}
         
     </ul>
-</body>
-</html>
+    <img src={% static "assets/certificado.png" %} alt="">
+{% endblock main %}
