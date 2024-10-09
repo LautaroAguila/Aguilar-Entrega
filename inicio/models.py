@@ -1,9 +1,9 @@
 from django.db import models
 
-class Auto(models.Model):
-    marca = models.CharField(max_length=15)
-    modelo = models.CharField(max_length=15)
-    anio = models.IntegerField()
+class Computadora(models.Model):
+    cpu = models.CharField(max_length=15)
+    gpu = models.CharField(max_length=15)
+    ram = models.IntegerField()
 
     def __str__(self):
-        return f'{self.id} {self.marca} {self.modelo} {self.anio}'
+        return f'{self.id} {self.cpu} {self.gpu} {self.ram}'

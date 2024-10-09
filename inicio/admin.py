@@ -1,4 +1,4 @@
 from django.contrib import admin
-from inicio.models import Auto
+from inicio.models import Computadora
 # Register your models here.
-admin.site.register(Auto)
+admin.site.register(Computadora)

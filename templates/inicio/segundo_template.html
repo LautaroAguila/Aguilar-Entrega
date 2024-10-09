@@ -1,5 +1,7 @@
 {% extends "inicio/index.html" %}
-
+{% block title_head %}
+    Segundo
+{% endblock title_head %}
 {% block h1_header %}
     SEGUNDO TEMPLATE
 {% endblock h1_header %}
@@ -22,5 +24,5 @@
         {% endfor %}
         
     </ul>
-    <img src={% static "assets/certificado.png" %} alt="">
+    <img src={% static "assets/certificado.png" %} alt="certificado" style="width: 200px; height: auto;">
 {% endblock main %}
