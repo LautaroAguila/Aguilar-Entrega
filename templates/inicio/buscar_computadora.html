@@ -9,9 +9,17 @@
 {% block main %}
 
 <form action={% url "inicio:buscar_computadora" %} >
-
-
-
+    {{form}}
+    <input type="submit">
 </form>
+{% if compus %}
+    <ul>
+        {% for compu in  compus %}
+            <li>{{compu}}</li>
+        {% endfor %}
+    </ul>
+{% else %}
+    <p>NO Hay Compus</p>
+{% endif %}
 
 {% endblock main %}

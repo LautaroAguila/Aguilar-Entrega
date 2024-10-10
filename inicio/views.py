@@ -1,12 +1,10 @@
 from django.template import Template, Context, loader
 from django.http import HttpResponse
 from datetime import datetime
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from inicio.models import Computadora
+from inicio.forms import *
 
-
-def mi_vista(request):
-    return HttpResponse('papanatas')
 
 def inicio(request):
     return render(request, 'inicio/index.html')
@@ -21,15 +19,38 @@ def segundo_template(request) :
             }
     return render(request, 'inicio/segundo_template.html', datos)
 
-def crear_computadora (request, cpu, gpu, ram):
+def crear_computadora_correcta (request, cpu, gpu, ram):
 
-    computadora = computadora(cpu = cpu,gpu = gpu ,ram = ram)
+    computadora = Computadora(cpu = cpu,gpu = gpu ,ram = ram)
     computadora.save()
-    return render(request, 'inicio/creacion_computadora_correcta.html', {'computadora':computadora})
+    return render(request, 'inicio/crear_computadora_correcta.html', {'computadora':computadora})
 
 def buscar_computadora (request):
+    formulario = BuscarComputadoraFormulario(request.GET)
 
-    return render(request, 'inicio/buscar_computadora.html', {'computadora':''})
+    if formulario.is_valid():
+        cpu = formulario.cleaned_data.get('cpu')
+        compus = Computadora.objects.filter(cpu__icontains = cpu)
+    else:
+        compus = Computadora.objects.all()
+    return render(request, 'inicio/buscar_computadora.html', {'computadoras':compus, 'form' : formulario})
+
 def crear_computadora (request):
 
-    return render(request, 'inicio/crear_computadora.html', {'computadora':''})
+    print('Request', request)
+    print('GET', request.POST)
+    print('POST', request.GET)
+
+    formulario = CrearComputadoraFormulario()
+
+    if request.method == 'POST':    
+        #computadora = Computadora(cpu = request.POST.get('cpu'),gpu = request.POST.get('gpu') ,ram = request.POST.get('ram'))
+        #computadora.save()
+        formulario = CrearComputadoraFormulario(request.POST)
+        if formulario.is_valid():
+            data = formulario.cleaned_data
+            computadora = Computadora(cpu = data.get('cpu'),gpu = data.get('gpu') ,ram = data.get('ram'))
+            computadora.save()
+            return redirect('inicio:buscar_computadora')
+
+    return render(request, 'inicio/crear_computadora.html', {'form': formulario})
