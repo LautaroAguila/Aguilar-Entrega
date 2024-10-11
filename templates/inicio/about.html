@@ -1,0 +1,32 @@
+{% extends "inicio/base.html" %}
+{% block title_head %}
+    About
+{% endblock title_head %}
+{% block h1_header %}
+    Sobre mi
+{% endblock h1_header %}
+{% block subtitulo %}
+
+{% endblock subtitulo %}
+{%load static%}
+{% block main %}
+    <section class="about-me container mt-5">
+        <div class="row">
+            <div class="col-md-4 text-center">
+                <img src={% static "assets/img.jpeg" %} alt="Your Image" class="rounded-circle img-fluid profile-pic">
+            </div>
+            <div class="col-md-8">
+                <h2>Hola! Soy Lautaro Aguilar.</h2>
+                <p>
+                    Soy estudiante universitario en la carrera de Ciencias de Datos en la Universidad de Buenos Aires. Tengo una sólida formación en desarrollo web y aprendizaje automático, con habilidades en React.js, Python, HTML, CSS y Bootstrap. Me apasiona resolver problemas y construir aplicaciones eficientes y fáciles de usar.
+                </p>
+                <p>
+                    Además de mis estudios, he completado varios proyectos que involucran modelos de aprendizaje supervisado y no supervisado, así como aplicaciones web full-stack. Actualmente, estoy mejorando mis habilidades en Java y profundizando mi conocimiento sobre invariantes de bucles.
+                </p>
+                <p>
+                    Fuera de mis estudios, disfruto mantenerme activo, yendo regularmente al gimnasio para llevar un estilo de vida saludable y equilibrado. Siempre estoy dispuesto a aprender nuevas tecnologías y crecer tanto a nivel personal como profesional.
+                </p>
+            </div>
+        </div>
+    </section>
+{% endblock main %}

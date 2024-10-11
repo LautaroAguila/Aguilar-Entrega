@@ -1,37 +1,28 @@
-{% extends "inicio/index.html" %}
+{% extends "inicio/base.html" %}
 {% block title_head %}
-    Crear Auto
+    INGRESAR COMPU
 {% endblock title_head %}
 {% block h1_header %}
-    Crear Auto
+    INGRESAR COMPU
 {% endblock h1_header %}
 {%load static%}
+{% block subtitulo %}
+    <p class="lead fw-normal text-white-50 mb-0">Crea aqui tus nuevos productos.</p>
+{% endblock subtitulo %}
 {% block main %}
 
-<form action={% url "inicio:crear_computadora" %} method="POST">
-
-    {% csrf_token %}
-    {% comment "" %}
-    <p>
-        Cpu:
-        <input type="text" name="cpu" placeholder="Cpu">
-    </p>
-    <p>
-        Gpu:
-        <input type="text" name="gpu" placeholder="Gpu">
-    </p>
-    <p>
-        Ram:
-        <input type="number" name="ram" placeholder="Ram">
-    </p>
-    {% endcomment %}
+<form action="{% url 'inicio:crear_computadora' %}" method="POST" class="container mt-4 p-3 border rounded shadow-sm">
     
-    {{form}}
+    {% csrf_token %}
+    
+    <div class="mb-3">
+        {{ form }}
+    </div>
 
-
-    <input type="submit" value="Enviar">
-    <button>ENVIAR</button>
-
+    <div class="d-flex justify-content-between">
+        <input type="submit" class="btn btn-secondary" value="Enviar">
+    </div>
+    
 </form>
 
 {% endblock main %}

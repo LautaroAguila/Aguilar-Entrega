@@ -38,3 +38,6 @@ def crear_computadora (request):
             return redirect('inicio:buscar_computadora')
 
     return render(request, 'inicio/crear_computadora.html', {'form': formulario})
+
+def about (request):
+    return render(request, 'inicio/about.html')

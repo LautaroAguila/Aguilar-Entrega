@@ -1,25 +1,34 @@
-{% extends "inicio/index.html" %}
+{% extends "inicio/base.html" %}
 {% block title_head %}
-    Buscar Auto
+    PRODUCTOS
 {% endblock title_head %}
 {% block h1_header %}
-    Buscar AUto
+    PRODUCTOS
 {% endblock h1_header %}
 {%load static%}
 {% block main %}
+{% block subtitulo %}
+    <p class="lead fw-normal text-white-50 mb-0">Encuentra aqui tus productos.</p>
+{% endblock subtitulo %}
+<form action="{% url 'inicio:buscar_computadora' %}" method="GET" class="container mt-4 p-3 border rounded shadow-sm">
+    
+    <div class="mb-3">
+        {{ form}}
+    </div>
 
-<form action={% url "inicio:buscar_computadora" %} >
-    {{form}}
-    <input type="submit">
+    <div class="text-center">
+        <input type="submit" class="btn btn-primary" value="Buscar">
+    </div>
+    
 </form>
+
 {% if compus %}
-    <ul>
-        {% for compu in  compus %}
-            <li>{{compu}}</li>
+    <ul class="list-group mt-4">
+        {% for compu in compus %}
+            <li class="list-group-item">{{ compu }}</li>
         {% endfor %}
     </ul>
 {% else %}
-    <p>NO Hay Compus</p>
+    <p class="text-center text-muted mt-4">NO Hay Computadoras Disponibles</p>
 {% endif %}
-
 {% endblock main %}
