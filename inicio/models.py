@@ -6,4 +6,4 @@ class Computadora(models.Model):
     ram = models.IntegerField()
 
     def __str__(self):
-        return f'{self.id} {self.cpu} {self.gpu} {self.ram}'
+        return f'{self.cpu} {self.gpu} {self.ram}'

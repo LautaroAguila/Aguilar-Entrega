@@ -9,22 +9,6 @@ from inicio.forms import *
 def inicio(request):
     return render(request, 'inicio/index.html')
 
-def primer_template(request) : 
-    contexto = Context()
-    return render(request, 'inicio/primer_template.html')
-def segundo_template(request) : 
-    fecha_actual = datetime.now()
-    datos = {   'fecha_actual' : fecha_actual,
-                'numeros' : list(range(1,11))
-            }
-    return render(request, 'inicio/segundo_template.html', datos)
-
-def crear_computadora_correcta (request, cpu, gpu, ram):
-
-    computadora = Computadora(cpu = cpu,gpu = gpu ,ram = ram)
-    computadora.save()
-    return render(request, 'inicio/crear_computadora_correcta.html', {'computadora':computadora})
-
 def buscar_computadora (request):
     formulario = BuscarComputadoraFormulario(request.GET)
 
@@ -33,7 +17,7 @@ def buscar_computadora (request):
         compus = Computadora.objects.filter(cpu__icontains = cpu)
     else:
         compus = Computadora.objects.all()
-    return render(request, 'inicio/buscar_computadora.html', {'computadoras':compus, 'form' : formulario})
+    return render(request, 'inicio/buscar_computadora.html', {'compus':compus, 'form' : formulario})
 
 def crear_computadora (request):
 
