@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block title_head %}
+    VER COMPU
+{% endblock title_head %}
+{% block h1_header %}
+    VER COMPU
+{% endblock h1_header %}
+{%load static%}
+{% block subtitulo %}
+    <p class="lead fw-normal text-white-50 mb-0">Estas son las especificaciones del producto.</p>
+{% endblock subtitulo %}
+{% block main %}
+
+<ul>
+    <li>Cpu: {{compu.cpu}}</li>
+    <li>Gpu: {{compu.gpu}}</li>
+    <li>Ram: {{compu.ram}}</li>
+</ul>
+
+{% endblock main %}

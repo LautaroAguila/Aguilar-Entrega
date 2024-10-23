@@ -1,4 +1,4 @@
-{% extends "inicio/base.html" %}
+{% extends "base.html" %}
 {% block title_head %}
     PRODUCTOS
 {% endblock title_head %}
@@ -25,7 +25,10 @@
 {% if compus %}
     <ul class="list-group mt-4">
         {% for compu in compus %}
-            <li class="list-group-item">{{ compu }}</li>
+            <li class="list-group-item">{{ compu }} 
+            | <a href={% url 'inicio:ver_computadora' compu.id %}>Ver mas.</a> 
+            | <a href={% url 'inicio:editar_computadora' compu.id %}>Editar.</a> 
+            | <a href={% url 'inicio:eliminar_computadora' compu.id %}>Eliminar.</a></li>
         {% endfor %}
     </ul>
 {% else %}

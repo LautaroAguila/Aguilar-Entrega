@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% block title_head %}
+    PRODUCTOS
+{% endblock title_head %}
+{% block h1_header %}
+    PRODUCTOS
+{% endblock h1_header %}
+{%load static%}
+
+{% block main %}
+{% block subtitulo %}
+    <p class="lead fw-normal text-white-50 mb-0">Encuentra aqui tus productos.</p>
+{% endblock subtitulo %}
+{% comment %} <form action="{% url 'inicio:buscar_computadora' %}" method="GET" class="container mt-4 p-3 border rounded shadow-sm">
+    
+    <div class="mb-3">
+        {{ form}}
+    </div>
+
+    <div class="text-center">
+        <input type="submit" class="btn btn-primary" value="Buscar">
+    </div>
+    
+</form> {% endcomment %}
+<button><a class="nav-link" href={% url "productos:crear_paleta" %}>Nueva Paleta</a></button>
+{% if paletas %}
+    <ul class="list-group mt-4">
+        {% for paleta in paletas %}
+            <li class="list-group-item">{{ paleta }} 
+            | <a href={% url 'productos:ver_paleta' paleta.id %}>Ver mas.</a> 
+            | <a href={% url 'productos:editar_paleta' paleta.id %}>Editar.</a> 
+            | <a href={% url 'productos:eliminar_paleta' paleta.id %}>Eliminar.</a>
+            </li>
+        {% endfor %}
+    </ul>
+{% else %}
+    <p class="text-center text-muted mt-4">NO Hay paletas Disponibles</p>
+{% endif %}
+{% endblock main %}

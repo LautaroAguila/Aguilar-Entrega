@@ -4,6 +4,7 @@ from datetime import datetime
 from django.shortcuts import render, redirect
 from inicio.models import Computadora
 from inicio.forms import *
+from django.contrib.auth.decorators import login_required
 
 
 def inicio(request):
@@ -18,6 +19,36 @@ def buscar_computadora (request):
     else:
         compus = Computadora.objects.all()
     return render(request, 'inicio/buscar_computadora.html', {'compus':compus, 'form' : formulario})
+
+
+def about (request):
+    return render(request, 'inicio/about.html')
+
+def ver_computadora(request, id):
+    compu = Computadora.objects.get(id=id)
+    return render(request, 'inicio/ver_computadora.html', {'compu' : compu} )
+
+@login_required
+def eliminar_computadora(request, id):
+    compu = Computadora.objects.get(id=id)
+    compu.delete()
+    return redirect('inicio:buscar_computadora')
+
+def editar_computadora(request, id):
+
+    compu = Computadora.objects.get(id=id)
+
+    formulario = EditarComputadoraFormulario(initial={'cpu': compu.cpu, 'gpu' : compu.gpu, 'ram' : compu.ram})
+
+    if request.method == 'POST':
+        formulario = EditarComputadoraFormulario(request.POST)
+        if formulario.is_valid():
+            compu.cpu = formulario.cleaned_data.get('cpu')
+            compu.gpu = formulario.cleaned_data.get('gpu')
+            compu.ram = formulario.cleaned_data.get('ram')
+            compu.save()
+            return redirect('inicio:buscar_computadora')
+    return render(request, 'inicio/editar_computadora.html', {'compu':compu,'form' : formulario})
 
 def crear_computadora (request):
 
@@ -38,6 +69,3 @@ def crear_computadora (request):
             return redirect('inicio:buscar_computadora')
 
     return render(request, 'inicio/crear_computadora.html', {'form': formulario})
-
-def about (request):
-    return render(request, 'inicio/about.html')

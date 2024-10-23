@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block title_head %}
+    VER Paleta
+{% endblock title_head %}
+{% block h1_header %}
+    VER Paleta
+{% endblock h1_header %}
+{%load static%}
+{% block subtitulo %}
+    <p class="lead fw-normal text-white-50 mb-0">Estas son las especificaciones del producto.</p>
+{% endblock subtitulo %}
+{% block main %}
+
+<ul>
+    <li>Marca: {{paleta.marca}}</li>
+    <li>Modelo: {{paleta.modelo}}</li>
+    <li>Fecha: {{paleta.fecha}}</li>
+</ul>
+
+{% endblock main %}
