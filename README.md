@@ -39,3 +39,6 @@ Compu-Shop es un proyecto desarrollado en Django que permite gestionar un sistem
 
 ## Uso
 Una vez que la aplicación esté en funcionamiento, podrás registrarte como nuevo usuario o iniciar sesión si ya tienes una cuenta. Podrás acceder a tu perfil, ver tu información y editarla según sea necesario. Ademas si eres un usario con permisos, ya sea superuser o staff, podras editar, crear o eliminar productos, segun corresponda.
+
+## Video
+https://www.youtube.com/watch?v=YSu34_SKAXM
