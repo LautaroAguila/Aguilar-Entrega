@@ -12,7 +12,11 @@
 <div class="container mt-5">
     <div class="row">
         <div class="col-md-4 text-center">
-            <img src={{ request.user.datosextra.avatar.url }} alt="{{ request.user.username }}" class="img-fluid rounded-circle mb-3" style="max-width: 200px;">
+            {% if request.user.datosextra.avatar %}
+                <img src={{ request.user.datosextra.avatar.url }} alt="{{ request.user.username }}" class="img-fluid rounded-circle mb-3" style="max-width: 200px;">
+            {% else %}
+                <img src="https://via.placeholder.com/300" alt="{{ request.user.username }}" class="img-fluid rounded-circle mb-3" style="max-width: 200px;">
+            {% endif %} 
             <h3>{{ request.user.first_name }} {{ request.user.last_name }}</h3>
         </div>
         <div class="col-md-8">
