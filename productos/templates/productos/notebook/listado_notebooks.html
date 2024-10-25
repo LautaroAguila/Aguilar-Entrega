@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+{% block title_head %}
+    PRODUCTOS
+{% endblock title_head %}
+{% block h1_header %}
+    PRODUCTOS
+{% endblock h1_header %}
+{% load static %}
+
+{% block subtitulo %}
+    <p class="lead fw-normal text-white-50 mb-0">Encuentra aquí tus productos.</p>
+{% endblock subtitulo %}
+
+{% block main %}
+<div class="container mt-5">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h2 class="mb-0">Lista de notebooks</h2>
+        <a href="{% url 'productos:crear_notebook' %}" class="btn btn-primary">Nueva notebook</a>
+    </div>
+
+    {% if notebooks %}
+        <ul class="list-group">
+            {% for notebook in notebooks %}
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                    {% if notebook.imagen %}
+                        <img src="{{ notebook.imagen.url }}" alt="Imagen de {{ notebook.nombre }}" class="img-fluid rounded" style="width: 300px; height: 300px; object-fit: cover;">
+                    {% else %}
+                        <img src="https://via.placeholder.com/300" class="img-fluid rounded" style="width: 300px; height: 300px; object-fit: cover;" alt="Imagen no disponible">
+                    {% endif %}
+
+                    <span>{{ notebook }}</span>
+                    <div>
+                        <a href={% url 'productos:ver_notebook' notebook.id %} class="btn btn-info btn-sm">Ver más</a>
+                        <a href={% url 'productos:editar_notebook' notebook.id %} class="btn btn-warning btn-sm">Editar</a>
+                        <a href={% url 'productos:eliminar_notebook' notebook.id %} class="btn btn-danger btn-sm">Eliminar</a>
+                    </div>
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p class="text-center text-muted mt-4">No hay notebooks disponibles.</p>
+    {% endif %}
+</div>
+{% endblock main %}

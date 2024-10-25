@@ -4,59 +4,45 @@
     INICIO
 {% endblock title_head %}
 
-{% block header%}
+{% block header %}
     <header class="bg-dark text-white text-center py-5">
         <div class="container">
             <h1 class="display-4">Bienvenidos a TiendaPC</h1>
             <p class="lead">Encuentra las mejores computadoras al mejor precio</p>
-            <a href={% url "inicio:buscar_computadora" %} class="btn btn-light btn-lg mt-3">Explorar Productos</a>
+            <a href={% url 'productos:listado_computadoras' %} class="btn btn-light btn-lg mt-3">Explorar Productos</a>
         </div>
     </header>
 {% endblock header %}
 
 {% block main %}
-        <!-- Hero Section -->
-    
+    <!-- Hero Section -->
 
     <!-- Productos Destacados -->
     <section class="container my-5">
         <h2 class="text-center mb-4">Productos Destacados</h2>
         <div class="row">
-            <!-- Producto 1 -->
-            <div class="col-md-4">
-                <div class="card">
-                    <img src="https://via.placeholder.com/300" class="card-img-top" alt="Producto 1">
-                    <div class="card-body">
-                        <h5 class="card-title">Laptop Gamer</h5>
-                        <p class="card-text">Alta performance para juegos y trabajo.</p>
-                        <a href="#" class="btn btn-secondary">Ver más</a>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Producto 2 -->
-            <div class="col-md-4">
-                <div class="card">
-                    <img src="https://via.placeholder.com/300" class="card-img-top" alt="Producto 2">
-                    <div class="card-body">
-                        <h5 class="card-title">PC de Escritorio</h5>
-                        <p class="card-text">Potente y adaptable para cualquier tarea.</p>
-                        <a href="#" class="btn btn-secondary">Ver más</a>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Producto 3 -->
-            <div class="col-md-4">
-                <div class="card">
-                    <img src="https://via.placeholder.com/300" class="card-img-top" alt="Producto 3">
-                    <div class="card-body">
-                        <h5 class="card-title">Ultrabook</h5>
-                        <p class="card-text">Ligera y portátil, ideal para viajes y oficina.</p>
-                        <a href="#" class="btn btn-secondary">Ver más</a>
-                    </div>
-                </div>
-            </div>
+            {% if compus %}
+                {% for compu in compus %}
+                        <div class="col-md-4 mb-4">
+                            <div class="card">
+                                {% if compu.imagen %}
+                                    <img src={{ compu.imagen.url }} class="card-img-top" alt="Producto 1">
+                                {% else %}
+                                    <img src="https://via.placeholder.com/300" class="card-img-top" alt="Producto 1">
+                                {% endif %}
+                                
+                                <div class="card-body">
+                                    <h5 class="card-title">{{compu.cpu}}</h5>
+                                    <p class="card-text">Alta performance para juegos y trabajo.</p>
+                                    <a href= {% url 'productos:ver_computadora' compu.id %} class="btn btn-secondary">Ver más</a>
+                                </div>
+                            </div>
+                        </div>
+                {% endfor %}
+                
+            {% else %}
+                <p class="text-center text-muted mt-4">NO Hay Computadoras Disponibles</p>
+            {% endif %}
         </div>
     </section>
 {% endblock main %}

@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% block title_head %}
+    ELIMINAR notebook
+{% endblock title_head %}
+{% block h1_header %}
+    ELIMINAR notebook
+{% endblock h1_header %}
+{% load static %}
+{% block subtitulo %}
+    <p class="lead fw-normal text-white-50 mb-0">¿Seguro que deseas eliminar este producto?</p>
+{% endblock subtitulo %}
+{% block main %}
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8 col-lg-6">
+            <div class="card shadow-sm">
+                <div class="card-body">
+                    <h2 class="card-title text-center mb-4">Confirmar Eliminación</h2>
+                    
+                    <form action={% url 'productos:eliminar_notebook' notebook.id %} method="POST" class="p-3">
+                        
+                        {% csrf_token %}
+                        
+                        <p class="text-center">¿Deseas eliminar la notebook <strong>{{notebook}}</strong>?</p>
+
+                        <div class="d-grid gap-2">
+                            <button type="submit" class="btn btn-danger">Confirmar</button>
+                        </div>
+                    
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock main %}

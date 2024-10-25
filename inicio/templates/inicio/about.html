@@ -3,20 +3,19 @@
     About
 {% endblock title_head %}
 {% block h1_header %}
-    Sobre mi
+    Sobre mí
 {% endblock h1_header %}
+{% load static %}
 {% block subtitulo %}
-
 {% endblock subtitulo %}
-{%load static%}
 {% block main %}
     <section class="about-me container mt-5">
-        <div class="row">
+        <div class="row align-items-center">
             <div class="col-md-4 text-center">
                 <img src={% static "assets/img.jpeg" %} alt="Your Image" class="rounded-circle img-fluid profile-pic">
             </div>
             <div class="col-md-8">
-                <h2>Hola! Soy Lautaro Aguilar.</h2>
+                <h2 class="fw-bold">Hola! Soy Lautaro Aguilar.</h2>
                 <p>
                     Soy estudiante universitario en la carrera de Ciencias de Datos en la Universidad de Buenos Aires. Tengo una sólida formación en desarrollo web y aprendizaje automático, con habilidades en React.js, Python, HTML, CSS y Bootstrap. Me apasiona resolver problemas y construir aplicaciones eficientes y fáciles de usar.
                 </p>

@@ -7,13 +7,27 @@ Login
 {% endblock h1_header %}
 {% block main %}
 
-<form action= {% url "usuarios:login" %} method="post">
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6 col-lg-4">
+            <div class="card shadow-sm">
+                <div class="card-body">
+                    <h2 class="card-title text-center mb-4">Iniciar Sesión</h2>
+                    <form action={% url "usuarios:login" %} method="post">
+                        {% csrf_token %}
+                        
+                        <!-- Render form fields -->
+                        {{ form.as_p }}
 
-{% csrf_token %}
-
-{{form}}
-<input type="submit" value="Iniciar Sesion.">
-
-</form>
+                        <!-- Submit button -->
+                        <div class="d-grid gap-2">
+                            <button type="submit" class="btn btn-primary">Iniciar Sesión</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
 {% endblock main %}

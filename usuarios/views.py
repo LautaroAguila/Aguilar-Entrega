@@ -25,7 +25,6 @@ def login(request):
             return redirect('inicio:inicio')
     return render(request, 'usuarios/login.html', {'form' : formulario})
 
-
 def register (request):
 
     formulario = FormularioDeCreacionDeUsuario()
@@ -50,6 +49,7 @@ def editar_perfil(request):
             new_avatar = formulario.cleaned_data.get('avatar')
             datos_extra.avatar = new_avatar if new_avatar else datos_extra.avatar
 
+            #datos_extra.avatar = formulario.cleaned_data['avatar']
             datos_extra.save()
 
             formulario.save()
