@@ -1,7 +1,7 @@
-# Aguilar Entrega
+# Compu-Shop
 
 ## Descripción
-Aguilar Entrega es un proyecto desarrollado en Django que permite gestionar un sistema de usuarios, donde se pueden registrar, iniciar sesión y editar su perfil. El objetivo del proyecto es ofrecer una plataforma fácil de usar para la gestión de usuarios y sus datos.
+Compu-Shop es un proyecto desarrollado en Django que permite gestionar un sistema de usuarios, donde se pueden registrar, iniciar sesión y editar su perfil. El objetivo del proyecto es ofrecer una plataforma fácil de usar para la gestión de usuarios y sus datos, y que en base a sus roles tengan distintas funcionalidades con los productos del sitio.
 
 ## Características
 - Registro de usuarios
