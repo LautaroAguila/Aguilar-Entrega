@@ -1,6 +1,7 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm
 from django.contrib.auth.models import User
+from .models import Mensaje
 
 class FormularioDeCreacionDeUsuario(UserCreationForm):
     email = forms.EmailField()
@@ -24,3 +25,13 @@ class FormularioEdicionPerfil(UserChangeForm):
     class Meta():
         model = User
         fields = ['email', 'first_name', 'last_name', 'avatar']
+
+
+
+class MensajeForm(forms.ModelForm):
+    class Meta:
+        model = Mensaje
+        fields = ['destinatario', 'contenido']
+        widgets = {
+            'contenido': forms.Textarea(attrs={'rows': 3}),
+        }

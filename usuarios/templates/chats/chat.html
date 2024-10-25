@@ -1,0 +1,69 @@
+{% extends "base.html" %}
+{% block title_head %}
+CHAT
+{% endblock title_head %}
+
+{% block header %}
+<header class="bg-dark py-5">
+    <div class="container text-center text-white">
+        <h1 class="display-4 fw-bolder">
+            {% block h1_header %}
+                CHAT
+            {% endblock h1_header %}
+        </h1>
+        {% block subtitulo %}
+            <p class="lead fw-normal text-white-50 mb-0">Conversa con otros usuarios!</p>
+        {% endblock subtitulo %}
+    </div>
+</header>
+{% endblock header %}
+
+{% block main %}
+<div class="container py-5">
+    <div class="row">
+        <!-- Lista de usuarios -->
+        <div class="col-md-4 mb-4">
+            <h3 class="mb-3">Usuarios:</h3>
+            <ul class="list-group">
+                {% for usuario in usuarios %}
+                    <li class="list-group-item {% if destinatario and destinatario.id == usuario.id %}active{% endif %}">
+                        <a href="{% url 'usuarios:chat' usuario.id %}" class="text-decoration-none text-dark">
+                            {{ usuario.username }}
+                        </a>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+
+        <!-- Chat con el destinatario seleccionado -->
+        <div class="col-md-8">
+            {% if destinatario %}
+                <div class="card">
+                    <div class="card-header">
+                        <h4>Conversación con {{ destinatario.username }}</h4>
+                    </div>
+                    <div class="card-body chat-box" style="max-height: 400px; overflow-y: auto;">
+                        <!-- Mostrar mensajes -->
+                        {% for mensaje in mensajes %}
+                            <div class="mb-3 {% if mensaje.remitente == user %}text-end{% endif %}">
+                                <p><strong>{{ mensaje.remitente.username }}:</strong> {{ mensaje.contenido }}</p>
+                                <p class="text-muted small">{{ mensaje.fecha|date:"d M, H:i" }}</p>
+                            </div>
+                        {% endfor %}
+                    </div>
+                    <div class="card-footer">
+                        <!-- Formulario para enviar mensajes -->
+                        <form method="post" class="d-flex">
+                            {% csrf_token %}
+                            {{ form.as_p }}
+                            <button type="submit" class="btn btn-primary ms-2">Enviar</button>
+                        </form>
+                    </div>
+                </div>
+            {% else %}
+                <div class="alert alert-info">Selecciona un usuario para empezar una conversación.</div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock main %}

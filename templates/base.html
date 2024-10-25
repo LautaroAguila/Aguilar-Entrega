@@ -43,7 +43,7 @@
                     <ul class="navbar-nav ms-auto">
                         {% if request.user.is_authenticated %}
                             <li class="nav-item">
-                                <a href={% url "usuarios:editar_perfil" %} class="nav-link">
+                                <a href={% url "usuarios:perfil" %} class="nav-link">
                                     {% if request.user.datosextra.avatar %}
                                         <img src="{{ request.user.datosextra.avatar.url }}" alt="Avatar" class="rounded-circle" height="40px">
                                     {% endif %}
@@ -70,6 +70,15 @@
                             <span class="badge bg-dark text-white ms-1 rounded-pill">0</span>
                         </button>
                     </form>
+
+                    {% if request.user.id %}
+                        <a href={% url 'usuarios:chat' request.user.id %} class="btn btn-outline-secondary ms-3" style="border-radius: 50%;">
+                            <i class="bi-chat-dots"></i>
+                        </a>
+                    {% else %}
+
+                    {% endif %}
+
                 </div>
             </div>
         </nav>

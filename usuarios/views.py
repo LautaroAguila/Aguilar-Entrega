@@ -1,12 +1,13 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm, UserChangeForm
 from django.contrib.auth import authenticate, login as django_login
-from usuarios.forms import FormularioDeCreacionDeUsuario, FormularioEdicionPerfil
+from usuarios.forms import FormularioDeCreacionDeUsuario, FormularioEdicionPerfil, MensajeForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.views import PasswordChangeView
 from django.urls import reverse_lazy
-from usuarios.models import DatosExtra
+from usuarios.models import DatosExtra, Mensaje
+from django.contrib.auth.models import User
 
 def login(request):
 
@@ -57,7 +58,44 @@ def editar_perfil(request):
 
     return render(request, 'usuarios/editar_perfil.html', {'form' : formulario})
 
+@login_required
+def perfil(request):
+    return render(request, 'usuarios/perfil.html')
 class CambiarPassword(LoginRequiredMixin, PasswordChangeView):
+    
     template_name = 'usuarios/cambiar_password.html'
 
     success_url = reverse_lazy('usuarios:editar_perfil')
+
+
+@login_required
+def chat(request, usuario_id=None):
+    if usuario_id:
+        destinatario = User.objects.get(id=usuario_id)
+        mensajes = Mensaje.objects.filter(
+            remitente=request.user, destinatario=destinatario
+        ) | Mensaje.objects.filter(
+            remitente=destinatario, destinatario=request.user
+        ).order_by('fecha')
+    else:
+        destinatario = None
+        mensajes = None
+
+    if request.method == 'POST':
+        form = MensajeForm(request.POST)
+        if form.is_valid():
+            mensaje = form.save(commit=False)
+            mensaje.remitente = request.user
+            mensaje.save()
+            return redirect('usuarios:chat', usuario_id=mensaje.destinatario.id)
+    else:
+        form = MensajeForm()
+
+    usuarios = User.objects.exclude(id=request.user.id)
+    return render(request, 'chats/chat.html', {
+        'form': form,
+        'mensajes': mensajes,
+        'destinatario': destinatario,
+        'usuarios': usuarios,
+    })
+

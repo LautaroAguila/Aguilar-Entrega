@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block title_head %}
+    Perfil
+{% endblock title_head %}
+
+{% block h1_header %}
+    Perfil de {{ request.user.username }}
+{% endblock h1_header %}
+
+{% block main %}
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-4 text-center">
+            <img src={{ request.user.datosextra.avatar.url }} alt="{{ request.user.username }}" class="img-fluid rounded-circle mb-3" style="max-width: 200px;">
+            <h3>{{ request.user.first_name }} {{ request.user.last_name }}</h3>
+        </div>
+        <div class="col-md-8">
+            <h4>Información del usuario</h4>
+            <ul class="list-unstyled">
+                <li><strong>Nombre de usuario:</strong> {{ request.user.username }}</li>
+                <li><strong>Email:</strong> {{ request.user.email }}</li>
+                <li>
+                    {% if request.user.is_staff %}
+                        <div class="alert alert-info">Sos parte del staff</div>
+                    {% else %}
+                        <div class="alert alert-success">Sos cliente</div>
+                    {% endif %}
+                </li>
+            </ul>
+            <a href="{% url 'usuarios:editar_perfil' %}" class="btn btn-primary">Editar perfil</a>
+        </div>
+    </div>
+</div>
+{% endblock main %}

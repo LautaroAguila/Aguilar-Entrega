@@ -15,28 +15,38 @@
 <div class="container mt-5">
     <div class="d-flex justify-content-between align-items-center mb-3">
         <h2 class="mb-0">Lista de notebooks</h2>
-        <a href="{% url 'productos:crear_notebook' %}" class="btn btn-primary">Nueva notebook</a>
+        {% if request.user.is_superuser %}
+            <a href="{% url 'productos:crear_notebook' %}" class="btn btn-primary">Nueva notebook</a>
+        {% endif %}
     </div>
 
     {% if notebooks %}
-        <ul class="list-group">
+        <!-- Usamos row para crear una fila de Bootstrap -->
+        <div class="row row-cols-1 row-cols-md-3 g-4">
             {% for notebook in notebooks %}
-                <li class="list-group-item d-flex justify-content-between align-items-center">
-                    {% if notebook.imagen %}
-                        <img src="{{ notebook.imagen.url }}" alt="Imagen de {{ notebook.nombre }}" class="img-fluid rounded" style="width: 300px; height: 300px; object-fit: cover;">
-                    {% else %}
-                        <img src="https://via.placeholder.com/300" class="img-fluid rounded" style="width: 300px; height: 300px; object-fit: cover;" alt="Imagen no disponible">
-                    {% endif %}
-
-                    <span>{{ notebook }}</span>
-                    <div>
-                        <a href={% url 'productos:ver_notebook' notebook.id %} class="btn btn-info btn-sm">Ver más</a>
-                        <a href={% url 'productos:editar_notebook' notebook.id %} class="btn btn-warning btn-sm">Editar</a>
-                        <a href={% url 'productos:eliminar_notebook' notebook.id %} class="btn btn-danger btn-sm">Eliminar</a>
+                <!-- Cada notebook será una columna con espacio ajustado automáticamente -->
+                <div class="col d-flex justify-content-between">
+                    <div class="card" style="width: 100%;">
+                        {% if notebook.imagen %}
+                            <img src="{{ notebook.imagen.url }}" alt="Imagen de {{ notebook.nombre }}" class="card-img-top img-fluid rounded" style="object-fit: cover; height: 300px;">
+                        {% else %}
+                            <img src="https://via.placeholder.com/300" class="card-img-top img-fluid rounded" style="object-fit: cover; height: 300px;" alt="Imagen no disponible">
+                        {% endif %}
+                        
+                        <div class="card-body d-flex flex-column justify-content-between">
+                            <h5 class="card-title">{{ notebook }}</h5>
+                            <div class="mt-auto">
+                                <a href={% url 'productos:ver_notebook' notebook.id %} class="btn btn-secondary btn-sm mb-2">Ver más</a>
+                                {% if request.user.is_staff %}
+                                    <a href={% url 'productos:editar_notebook' notebook.id %} class="btn btn-dark btn-sm mb-2">Editar</a>
+                                    <a href={% url 'productos:eliminar_notebook' notebook.id %} class="btn btn-danger btn-sm mb-2">Eliminar</a>
+                                {% endif %}
+                            </div>
+                        </div>
                     </div>
-                </li>
+                </div>
             {% endfor %}
-        </ul>
+        </div>
     {% else %}
         <p class="text-center text-muted mt-4">No hay notebooks disponibles.</p>
     {% endif %}

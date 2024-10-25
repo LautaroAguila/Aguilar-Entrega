@@ -17,18 +17,25 @@
             <h5 class="mb-0">Detalles de la notebook</h5>
         </div>
         <div class="card-body">
-            {% if notebook.imagen %}
-                <img src="{{ notebook.imagen.url }}" alt="Imagen de {{ notebook.nombre }}" class="img-fluid rounded" style="width: 300px; height: 300px; object-fit: cover;">
-            {% else %}
-                <img src="https://via.placeholder.com/300" class="img-fluid rounded" style="width: 300px; height: 300px; object-fit: cover;" alt="Imagen no disponible">
-            {% endif %}
+            <div class="row">
+                <!-- Imagen a la izquierda -->
+                <div class="col-md-4">
+                    {% if notebook.imagen %}
+                        <img src="{{ notebook.imagen.url }}" alt="Imagen de {{ notebook.nombre }}" class="img-fluid rounded" style="object-fit: cover; width: 100%;">
+                    {% else %}
+                        <img src="https://via.placeholder.com/300" class="img-fluid rounded" style="object-fit: cover; width: 100%;" alt="Imagen no disponible">
+                    {% endif %}
+                </div>
 
-            <ul class="list-group list-group-flush">
-                <li class="list-group-item"><strong>Marca:</strong> {{ notebook.marca }}</li>
-                <li class="list-group-item"><strong>Modelo:</strong> {{ notebook.modelo }}</li>
-                <li class="list-group-item"><strong>Fecha de lanzamiento:</strong> {{ notebook.fecha }}</li>
-                
-            </ul>
+                <!-- Especificaciones a la derecha -->
+                <div class="col-md-8">
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item"><strong>Marca:</strong> {{ notebook.marca }}</li>
+                        <li class="list-group-item"><strong>Modelo:</strong> {{ notebook.modelo }}</li>
+                        <li class="list-group-item"><strong>Fecha de lanzamiento:</strong> {{ notebook.fecha }}</li>
+                    </ul>
+                </div>
+            </div>
         </div>
     </div>
 </div>
