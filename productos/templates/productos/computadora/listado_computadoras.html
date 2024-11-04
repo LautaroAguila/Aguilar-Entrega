@@ -16,15 +16,13 @@
     <div class="d-flex justify-content-between align-items-center mb-3">
         <h2 class="mb-0">Lista de computadoras</h2>
         {% if request.user.is_superuser %}
-            <a href="{% url 'productos:crear_computadora' %}" class="btn btn-primary">Nueva computadora</a>
+            <a href="{% url 'productos:crear_computadora' %}" class="btn btn-primary">Nuevo Producto</a>
         {% endif %}
     </div>
 
     {% if computadoras %}
-        <!-- Usamos row para crear una fila de Bootstrap -->
         <div class="row row-cols-1 row-cols-md-3 g-4">
             {% for computadora in computadoras %}
-                <!-- Cada computadora será una columna -->
                 <div class="col">
                     <div class="card h-100">
                         {% if computadora.imagen %}

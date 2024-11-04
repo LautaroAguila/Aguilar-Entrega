@@ -16,10 +16,9 @@ Login
                     <form action={% url "usuarios:login" %} method="post">
                         {% csrf_token %}
                         
-                        <!-- Render form fields -->
                         {{ form.as_p }}
 
-                        <!-- Submit button -->
+                        
                         <div class="d-grid gap-2">
                             <button type="submit" class="btn btn-primary">Iniciar Sesión</button>
                         </div>

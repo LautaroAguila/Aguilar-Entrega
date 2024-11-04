@@ -21,7 +21,6 @@ CHAT
 {% block main %}
 <div class="container py-5">
     <div class="row">
-        <!-- Lista de usuarios -->
         <div class="col-md-4 mb-4">
             <h3 class="mb-3">Usuarios:</h3>
             <ul class="list-group">
@@ -35,7 +34,6 @@ CHAT
             </ul>
         </div>
 
-        <!-- Chat con el destinatario seleccionado -->
         <div class="col-md-8">
             {% if destinatario %}
                 <div class="card">
@@ -43,7 +41,7 @@ CHAT
                         <h4>Conversación con {{ destinatario.username }}</h4>
                     </div>
                     <div class="card-body chat-box" style="max-height: 400px; overflow-y: auto;">
-                        <!-- Mostrar mensajes -->
+                        
                         {% for mensaje in mensajes %}
                             <div class="mb-3 {% if mensaje.remitente == user %}text-end{% endif %}">
                                 <p><strong>{{ mensaje.remitente.username }}:</strong> {{ mensaje.contenido }}</p>
@@ -52,7 +50,6 @@ CHAT
                         {% endfor %}
                     </div>
                     <div class="card-footer">
-                        <!-- Formulario para enviar mensajes -->
                         <form method="post" class="d-flex">
                             {% csrf_token %}
                             {{ form.as_p }}

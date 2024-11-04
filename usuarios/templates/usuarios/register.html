@@ -16,10 +16,10 @@ Registrarse
                     <form action={% url "usuarios:register" %} method="post">
                         {% csrf_token %}
                         
-                        <!-- Render form fields -->
+                        
                         {{ form.as_p }}
 
-                        <!-- Submit button -->
+                        
                         <div class="d-grid gap-2">
                             <button type="submit" class="btn btn-primary">Registrarse</button>
                         </div>

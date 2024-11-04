@@ -18,7 +18,6 @@
         </div>
         <div class="card-body">
             <div class="row">
-                <!-- Imagen a la izquierda -->
                 <div class="col-md-4">
                     {% if computadora.imagen %}
                         <img src="{{ computadora.imagen.url }}" alt="Imagen de {{ computadora.nombre }}" class="img-fluid rounded" style="object-fit: cover; width: 100%;">
@@ -27,7 +26,6 @@
                     {% endif %}
                 </div>
 
-                <!-- Características a la derecha -->
                 <div class="col-md-8">
                     <ul class="list-group list-group-flush">
                         <li class="list-group-item"><strong>CPU:</strong> {{ computadora.cpu }}</li>
